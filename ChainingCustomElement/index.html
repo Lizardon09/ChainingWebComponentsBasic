@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>WebComponentDemo</title>
+  <base href="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="./js/power.js"></script>
+  <script src="./js/squareroot.js"></script>
+  <script src="./js/divided-element.js"></script>
+  <script src="./js/home-element.js"></script>
+  <script src="./js/multiply.js"></script> 
+</head>
+<body>
+
+  <input id=numberBox name="numberBox" type="text" placeholder="0">
+  
+  <button onclick="getTextBoxValue();">Insert Input</button>
+
+  <app-power id="custompower"></app-power>
+  
+  <custom-square-root id="sqrtComponent"></custom-square-root>
+  
+  <element-divide id ="divideElement"></element-divide>
+  
+  <subtraction-custom id="elementid"></subtraction-custom>
+  
+  <app-multiplication id = "multiply"></app-multiplication>
+  
+  <script>
+    function getTextBoxValue(){
+      var textboxvalue = document.getElementById("numberBox").value;
+      document.getElementById("custompower").inputvalue = textboxvalue;
+    }
+  </script>
+  
+  <script>
+    const pow = document.querySelector('app-power');
+    pow.addEventListener('result',(event) =>{
+      console.log(`"Power event" emitted: ${event.detail}`);
+	  document.getElementById("sqrtComponent").inputvalue = event.detail;
+    });
+	
+	const sqrt= document.querySelector('custom-square-root');
+    sqrt.addEventListener('result',(event) =>{
+		console.log(`"result" emitted: ${event.detail}`);
+		document.getElementById("divideElement").Num1 = event.detail;
+     });
+	 
+	const divide = document.querySelector('element-divide');
+    divide.addEventListener('output',(event) =>{
+      console.log(`"Divide event" emitted: ${event.detail}`);
+	  document.getElementById('elementid').firstvalue = event.detail;
+    });
+	
+	const subtract = document.querySelector('subtraction-custom');
+    subtract.addEventListener('action',(event) =>{
+      console.log(`"Subtract event" emitted: ${event.detail}`);
+	  document.getElementById('multiply').inputValue = event.detail;
+    });
+	
+	const multiplication = document.querySelector('app-multiplication');
+    multiplication.addEventListener('action',(event) =>{
+      console.log(`"Multiplication event" emitted: ${event.detail}`);
+    });
+	 
+  </script>
+</body>
+</html>
